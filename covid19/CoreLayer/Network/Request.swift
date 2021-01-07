@@ -14,7 +14,6 @@ enum HTTPMethod: String {
 protocol Request {
     var baseURL: String { get }
     var path: String { get }
-    var parameters: [String: String]? { get }
     var method: HTTPMethod { get }
 }
 
@@ -33,12 +32,6 @@ extension Request {
     private var url: URL? {
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.path = path
-
-        switch method {
-        case .get:
-            urlComponents?.queryItems = parameters?.map { URLQueryItem(name: $0.key, value: $0.value) }
-        }
-
         return urlComponents?.url
     }
     

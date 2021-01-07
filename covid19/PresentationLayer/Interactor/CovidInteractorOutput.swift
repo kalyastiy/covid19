@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol CovidInteractorOutput: class {
+    
+    func presentCovid(models: [CovidModel]?)
+    
+}

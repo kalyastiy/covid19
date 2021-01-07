@@ -6,3 +6,25 @@
 //
 
 import Foundation
+
+protocol CovidFacadeType {
+    
+    func getCovidInfo(completion: @escaping ([CovidModel]?) -> Void)
+    
+}
+
+final class CovidFacade: CovidFacadeType {
+    
+    private let covidNetworking: CovidNetworkingType
+    
+    init(covidNetworking: CovidNetworkingType) {
+        self.covidNetworking = covidNetworking
+    }
+    
+    func getCovidInfo(completion: @escaping ([CovidModel]?) -> Void) {
+        covidNetworking.getCovidInfo() { model in
+            completion(model)
+        }
+    }
+    
+}
